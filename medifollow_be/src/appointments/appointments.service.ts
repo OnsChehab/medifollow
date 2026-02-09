@@ -51,23 +51,27 @@ export class AppointmentsService {
         }
 
         // 2. Overlap Rule: (start < existingEnd) AND (end > existingStart)
-        const overlapQuery = this.appointmentRepo
-            .createQueryBuilder('a')
-            .where('a.doctorId = :doctorId', { doctorId })
-            .andWhere("a.status = 'BOOKED'")
-            .andWhere('a.startDateTime < :end AND a.endDateTime > :start', { start, end });
+        const existingAppt = await this.appointmentRepo.findOne({
+            where: {
+                doctorId,
+                status: 'BOOKED',
+                startDateTime: { $lt: end } as any,
+                endDateTime: { $gt: start } as any
+            }
+        });
 
-        const existingAppt = await overlapQuery.getOne();
         if (existingAppt) {
             throw new ConflictException('Slot not available (BOOKED)');
         }
 
         // 3. Exception Overlap
-        const exceptionOverlap = await this.exceptionRepo
-            .createQueryBuilder('e')
-            .where('e.doctorId = :doctorId', { doctorId })
-            .andWhere('e.startDateTime < :end AND e.endDateTime > :start', { start, end })
-            .getOne();
+        const exceptionOverlap = await this.exceptionRepo.findOne({
+            where: {
+                doctorId,
+                startDateTime: { $lt: end } as any,
+                endDateTime: { $gt: start } as any
+            }
+        });
 
         if (exceptionOverlap) {
             throw new ConflictException('Slot not available (EXCEPTION)');

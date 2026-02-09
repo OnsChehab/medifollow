@@ -1,43 +1,57 @@
 <div class="d-flex wrapper" [class.toggled]="isSidebarCollapsed">
     <!-- Sidebar -->
-    <div class="bg-dark text-white border-end" id="sidebar-wrapper">
-        <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom">
-            <i class="fas fa-user-md me-2"></i>MediFollow
+    <div class="bg-navy" id="sidebar-wrapper">
+        <div class="sidebar-heading text-center py-4 fs-4 fw-bold text-uppercase">
+            <i class="fas fa-hand-holding-medical me-2"></i>MediFollow
         </div>
-        <div class="list-group list-group-flush my-3">
+        <div class="list-group list-group-flush my-2">
             <a routerLink="/app/dashboard"
-                class="list-group-item list-group-item-action bg-transparent second-text active">
-                <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                routerLinkActive="active"
+                class="list-group-item list-group-item-action bg-transparent">
+                <i class="fas fa-th-large me-2"></i>Dashboard
             </a>
+            
             @if (authService.currentUser()?.role !== 'PATIENT') {
-            <a routerLink="/app/admin"
-                class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                <i class="fas fa-cogs me-2"></i>Admin
-            </a>
+            <div class="list-group-item bg-transparent text-muted small text-uppercase mt-3 opacity-50">Management</div>
             <a routerLink="/app/patients"
-                class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                <i class="fas fa-procedures me-2"></i>Patients
+                routerLinkActive="active"
+                class="list-group-item list-group-item-action bg-transparent">
+                <i class="fas fa-user-friends me-2"></i>Patients List
+            </a>
+            <a routerLink="/app/admin"
+                routerLinkActive="active"
+                class="list-group-item list-group-item-action bg-transparent">
+                <i class="fas fa-shield-alt me-2"></i>Administration
             </a>
             }
-            <div class="list-group-item bg-transparent text-muted small text-uppercase mt-2">Patient Data</div>
+
+            <div class="list-group-item bg-transparent text-muted small text-uppercase mt-3 opacity-50">Patient Portal</div>
             <a routerLink="/app/patient/vitals"
-                class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                <i class="fas fa-heartbeat me-2"></i>Enter Vitals
+                routerLinkActive="active"
+                class="list-group-item list-group-item-action bg-transparent">
+                <i class="fas fa-heartbeat me-2"></i>Daily Vitals
             </a>
             <a routerLink="/app/patient/symptoms"
-                class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                <i class="fas fa-notes-medical me-2"></i>Report Symptoms
+                routerLinkActive="active"
+                class="list-group-item list-group-item-action bg-transparent">
+                <i class="fas fa-notes-medical me-2"></i>Symptom Log
             </a>
 
-            <div class="list-group-item bg-transparent text-muted small text-uppercase mt-2">Medical Staff</div>
+            @if (isMedical()) {
+            <div class="list-group-item bg-transparent text-muted small text-uppercase mt-3 opacity-50">Clinical Tools</div>
             <a routerLink="/app/doctor/patients"
-                class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
-                <i class="fas fa-user-md me-2"></i>My Patients
+                routerLinkActive="active"
+                class="list-group-item list-group-item-action bg-transparent">
+                <i class="fas fa-clipboard-check me-2"></i>My Consultations
             </a>
-            <a routerLink="/auth/login"
-                class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
-                <i class="fas fa-power-off me-2"></i>Logout
-            </a>
+            }
+
+            <div class="mt-auto mb-4 px-3">
+                <a routerLink="/auth/login"
+                    class="btn btn-outline-danger w-100 rounded-pill btn-sm d-flex align-items-center justify-content-center">
+                    <i class="fas fa-sign-out-alt me-2"></i>Logout
+                </a>
+            </div>
         </div>
     </div>
     <!-- /#sidebar-wrapper -->

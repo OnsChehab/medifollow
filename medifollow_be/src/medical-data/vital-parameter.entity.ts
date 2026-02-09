@@ -1,10 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, CreateDateColumn } from 'typeorm';
+import { Entity, Column, ObjectIdColumn, ObjectId, ManyToOne, JoinColumn, CreateDateColumn } from 'typeorm';
 import { Patient } from '../patients/patient.entity';
 import { VitalParameterType } from '../common/enums/enums';
 
 @Entity('vital_parameters')
 export class VitalParameter {
-    @PrimaryGeneratedColumn('uuid')
+    @ObjectIdColumn()
+    _id: ObjectId;
+
+    @Column()
     id: string;
 
     @ManyToOne(() => Patient)
@@ -12,18 +15,17 @@ export class VitalParameter {
     patient: Patient;
 
     @Column({
-        type: 'enum',
         enum: VitalParameterType,
     })
     type: VitalParameterType;
 
-    @Column({ type: 'decimal', precision: 10, scale: 2 })
+    @Column()
     value: number;
 
     @Column({ nullable: true })
     unit: string;
 
-    @Column({ type: 'timestamp', nullable: true })
+    @Column({ nullable: true })
     measured_at: Date;
 
     @CreateDateColumn()

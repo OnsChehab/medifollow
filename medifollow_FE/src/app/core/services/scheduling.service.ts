@@ -19,11 +19,19 @@ export class SchedulingService {
         return this.http.post(`${this.apiUrl}/appointments`, data);
     }
 
-    getDoctors(): Observable<any[]> {
-        // This would typically come from a users/staff service, 
-        // but we can add a quick helper here or assume its in staff service
-        return this.http.get<any[]>(`${this.apiUrl}/users`, {
-            params: { role: 'PHYSICIAN' }
-        });
+    getDoctors(serviceId?: string): Observable<any[]> {
+        let params: any = { role: 'PHYSICIAN' };
+        if (serviceId) {
+            params.serviceId = serviceId;
+        }
+        return this.http.get<any[]>(`${this.apiUrl}/users`, { params });
+    }
+
+    getPatients(): Observable<any[]> {
+        return this.http.get<any[]>(`${this.apiUrl}/patients`);
+    }
+
+    getServices(): Observable<any[]> {
+        return this.http.get<any[]>(`${this.apiUrl}/hospital-services`);
     }
 }

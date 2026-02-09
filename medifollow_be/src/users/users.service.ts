@@ -10,11 +10,12 @@ export class UsersService {
         private usersRepository: Repository<User>,
     ) { }
 
-    findAll(role?: string): Promise<User[]> {
-        if (role) {
-            return this.usersRepository.find({ where: { role: role as any } });
-        }
-        return this.usersRepository.find();
+    findAll(role?: string, serviceId?: string): Promise<User[]> {
+        const where: any = {};
+        if (role) where.role = role;
+        if (serviceId) where.hospital_serviceId = serviceId;
+
+        return this.usersRepository.find({ where });
     }
 
     findOne(id: string): Promise<User | null> {

@@ -1,10 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToOne, CreateDateColumn } from 'typeorm';
+import { Entity, Column, ObjectIdColumn, ObjectId, OneToOne, JoinColumn, ManyToOne, CreateDateColumn } from 'typeorm';
 import { User } from '../users/user.entity';
 import { HospitalService } from '../hospital-services/hospital-service.entity';
 
 @Entity('patients')
 export class Patient {
-    @PrimaryGeneratedColumn('uuid')
+    @ObjectIdColumn()
+    _id: ObjectId;
+
+    @Column()
     id: string;
 
     @OneToOne(() => User)
@@ -14,7 +17,7 @@ export class Patient {
     @Column({ unique: true })
     medical_record_number: string;
 
-    @Column({ type: 'date', nullable: true })
+    @Column({ nullable: true })
     date_of_birth: Date;
 
     @Column({ nullable: true })
@@ -28,10 +31,10 @@ export class Patient {
     @JoinColumn({ name: 'assigned_physician_id' })
     assigned_physician: User;
 
-    @Column({ type: 'timestamp', nullable: true })
+    @Column({ nullable: true })
     admission_at: Date;
 
-    @Column({ type: 'timestamp', nullable: true })
+    @Column({ nullable: true })
     discharge_at: Date;
 
     @Column({ default: 'ACTIVE' })

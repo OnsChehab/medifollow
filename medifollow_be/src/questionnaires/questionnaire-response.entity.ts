@@ -1,10 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, CreateDateColumn } from 'typeorm';
+import { Entity, Column, ObjectIdColumn, ObjectId, ManyToOne, JoinColumn, CreateDateColumn } from 'typeorm';
 import { Questionnaire } from './questionnaire.entity';
 import { Patient } from '../patients/patient.entity';
 
 @Entity('questionnaire_responses')
 export class QuestionnaireResponse {
-    @PrimaryGeneratedColumn('uuid')
+    @ObjectIdColumn()
+    _id: ObjectId;
+
+    @Column()
     id: string;
 
     @ManyToOne(() => Questionnaire)
@@ -15,18 +18,18 @@ export class QuestionnaireResponse {
     @JoinColumn({ name: 'patient_id' })
     patient: Patient;
 
-    @Column({ type: 'timestamp', nullable: true })
+    @Column({ nullable: true })
     started_at: Date;
 
-    @Column({ type: 'timestamp', nullable: true })
+    @Column({ nullable: true })
     completed_at: Date;
 
     @Column({ default: 'IN_PROGRESS' })
     status: string;
 
-    @Column({ type: 'jsonb', nullable: true })
+    @Column({ nullable: true })
     answers_json: any;
 
-    @Column({ type: 'timestamp', nullable: true })
+    @Column({ nullable: true })
     submitted_at: Date;
 }

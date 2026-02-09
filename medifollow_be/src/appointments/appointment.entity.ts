@@ -1,10 +1,14 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, ObjectIdColumn, ObjectId } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Entity('appointments')
 export class Appointment {
     @ApiProperty()
-    @PrimaryGeneratedColumn('uuid')
+    @ObjectIdColumn()
+    _id: ObjectId;
+
+    @ApiProperty()
+    @Column()
     id: string;
 
     @ApiProperty()
@@ -16,11 +20,11 @@ export class Appointment {
     patientId: string;
 
     @ApiProperty()
-    @Column({ type: 'timestamp' })
+    @Column()
     startDateTime: Date;
 
     @ApiProperty()
-    @Column({ type: 'timestamp' })
+    @Column()
     endDateTime: Date;
 
     @ApiProperty()

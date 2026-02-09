@@ -92,19 +92,23 @@ export class DoctorScheduleService {
         workEnd.setUTCHours(eh, em, 0, 0);
 
         // get blocked exceptions
-        const exceptions = await this.exceptionRepo
-            .createQueryBuilder('e')
-            .where('e.doctorId = :doctorId', { doctorId })
-            .andWhere('e.startDateTime < :dayEnd AND e.endDateTime > :dayStart', { dayStart, dayEnd })
-            .getMany();
+        const exceptions = await this.exceptionRepo.find({
+            where: {
+                doctorId: doctorId,
+                startDateTime: { $lt: dayEnd } as any,
+                endDateTime: { $gt: dayStart } as any
+            }
+        });
 
         // get booked appointments
-        const appointments = await this.appointmentRepo
-            .createQueryBuilder('a')
-            .where('a.doctorId = :doctorId', { doctorId })
-            .andWhere("a.status = 'BOOKED'")
-            .andWhere('a.startDateTime < :dayEnd AND a.endDateTime > :dayStart', { dayStart, dayEnd })
-            .getMany();
+        const appointments = await this.appointmentRepo.find({
+            where: {
+                doctorId: doctorId,
+                status: 'BOOKED',
+                startDateTime: { $lt: dayEnd } as any,
+                endDateTime: { $gt: dayStart } as any
+            }
+        });
 
         const slots: any[] = [];
 

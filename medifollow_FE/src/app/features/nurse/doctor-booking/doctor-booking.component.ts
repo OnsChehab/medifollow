@@ -12,8 +12,8 @@ import { SchedulingService } from '../../../core/services/scheduling.service';
       <div class="container">
         <div class="d-flex justify-content-between align-items-end mb-4">
           <div>
-            <h1 class="display-5 text-navy mb-1">Book Appointment</h1>
-            <p class="text-muted lead mb-0">Select a physician and find an available slot</p>
+            <h1 class="display-5 text-navy fw-bold mb-1">Book Appointment</h1>
+            <p class="text-muted lead mb-0">Select patient and service to find preferred clinical staff</p>
           </div>
           <div class="badge bg-white text-navy px-3 py-2 rounded-pill shadow-sm border">
             <i class="fas fa-shield-alt text-teal me-2"></i>Secure Booking
@@ -23,34 +23,61 @@ import { SchedulingService } from '../../../core/services/scheduling.service';
         <div class="row g-4">
           <!-- Left: Choices -->
           <div class="col-lg-4">
-            <div class="card border-0 h-100 sticky-top" style="top: 2rem; max-height: calc(100vh - 4rem);">
-              <div class="card-body p-4">
-                <h5 class="text-navy mb-4 d-flex align-items-center">
-                  <span class="step-num me-2">1</span> Choose Physician
-                </h5>
+            <div class="card card-premium h-100 border-0 shadow-lg">
+              <div class="card-body p-4 overflow-auto">
                 
+                <!-- Step 1: Patient -->
+                <h5 class="text-navy mb-3 d-flex align-items-center">
+                  <span class="step-num me-2">1</span> Choose Patient
+                </h5>
                 <div class="mb-4">
-                  <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-1">Doctor</label>
-                  <select class="form-select border-0 bg-light p-3" [(ngModel)]="selectedDoctorId" (change)="loadSlots()">
-                    <option value="">Select a doctor...</option>
-                    @for (doc of doctors(); track doc.id) {
-                      <option [value]="doc.id">{{ doc.name }}</option>
+                  <select class="form-select border-0 bg-light p-3" [(ngModel)]="selectedPatientId">
+                    <option value="">Select a patient...</option>
+                    @for (patient of patients(); track patient.id) {
+                      <option [value]="patient.id">{{ patient.name }}</option>
                     }
                   </select>
                 </div>
 
-                <h5 class="text-navy mb-4 d-flex align-items-center">
-                  <span class="step-num me-2">2</span> Select Date
+                <!-- Step 2: Service -->
+                <h5 class="text-navy mb-3 d-flex align-items-center">
+                  <span class="step-num me-2">2</span> Select Service
                 </h5>
-
                 <div class="mb-4">
-                  <label class="form-label small fw-bold text-uppercase text-muted letter-spacing-1">Preferred Date</label>
+                  <select class="form-select border-0 bg-light p-3" [(ngModel)]="selectedServiceId" (change)="onServiceChange()">
+                    <option value="">Select a service...</option>
+                    @for (svc of services(); track svc.id) {
+                      <option [value]="svc.id">{{ svc.name }}</option>
+                    }
+                  </select>
+                </div>
+
+                <!-- Step 3: Doctor (Conditional) -->
+                @if (selectedServiceId) {
+                  <h5 class="text-navy mb-3 d-flex align-items-center animate-fade-in">
+                    <span class="step-num me-2">3</span> Choose Physician
+                  </h5>
+                  <div class="mb-4 animate-fade-in">
+                    <select class="form-select border-0 bg-light p-3" [(ngModel)]="selectedDoctorId" (change)="loadSlots()">
+                      <option value="">Select a doctor...</option>
+                      @for (doc of doctors(); track doc.id) {
+                        <option [value]="doc.id">{{ doc.name }}</option>
+                      }
+                    </select>
+                  </div>
+                }
+
+                <!-- Step 4: Date -->
+                <h5 class="text-navy mb-3 d-flex align-items-center">
+                  <span class="step-num me-2">{{ selectedServiceId ? 4 : 3 }}</span> Select Date
+                </h5>
+                <div class="mb-4">
                   <input type="date" class="form-control border-0 bg-light p-3" [(ngModel)]="selectedDate" (change)="loadSlots()">
                 </div>
 
-                <div class="mt-auto pt-4 border-top" *ngIf="selectedDoctorId && selectedDate">
+                <div class="mt-4 pt-4 border-top" *ngIf="selectedDoctorId && selectedDate">
                   <div class="d-flex align-items-center justify-content-between mb-2">
-                    <span class="text-muted">Available Slots</span>
+                    <span class="text-muted small fw-bold">Availability Status</span>
                     <span class="badge bg-teal-soft text-teal">{{ slots().length }} slots</span>
                   </div>
                   <div class="progress" style="height: 6px;">
@@ -63,11 +90,11 @@ import { SchedulingService } from '../../../core/services/scheduling.service';
 
           <!-- Right: Schedule Grid -->
           <div class="col-lg-8">
-            <div class="card border-0 h-100">
+            <div class="card card-premium h-100 border-0 shadow-lg">
               <div class="card-body p-4">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                   <h5 class="text-navy mb-0 d-flex align-items-center">
-                    <span class="step-num me-2">3</span> Pick a Time
+                    <span class="step-num me-2">{{ selectedServiceId ? 5 : 4 }}</span> Pick a Time
                   </h5>
                   <div class="d-flex gap-4">
                     <div class="d-flex align-items-center gap-2">
@@ -91,16 +118,16 @@ import { SchedulingService } from '../../../core/services/scheduling.service';
                     <div class="empty-state-icon mb-4">
                       <i class="fas fa-calendar-check fa-3x"></i>
                     </div>
-                    <h5 class="text-navy">Ready to Book?</h5>
-                    <p class="text-muted">Select doctor and date to view available times</p>
+                    <h5 class="text-navy fw-bold">Ready to Book?</h5>
+                    <p class="text-muted">Choose a patient, service and doctor to view available times</p>
                   </div>
                 } @else if (slots().length === 0) {
                   <div class="text-center py-5">
                     <div class="empty-state-icon mb-4 variant-warning">
                       <i class="fas fa-calendar-times fa-3x"></i>
                     </div>
-                    <h5 class="text-navy">No Availability</h5>
-                    <p class="text-muted">The selected doctor has no working hours on this day.</p>
+                    <h5 class="text-navy fw-bold">No Availability</h5>
+                    <p class="text-muted">The selected staff has no working hours on this day.</p>
                   </div>
                 } @else {
                   <div class="row g-3">
@@ -224,27 +251,55 @@ import { SchedulingService } from '../../../core/services/scheduling.service';
       color: #f97316;
     }
 
+    .animate-fade-in {
+      animation: fadeIn 0.4s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .dot { width: 8px; height: 8px; border-radius: 50%; }
   `]
 })
 export class DoctorBookingComponent {
   schedulingService = inject(SchedulingService);
 
+  patients = signal<any[]>([]);
+  services = signal<any[]>([]);
   doctors = signal<any[]>([]);
   slots = signal<any[]>([]);
   loading = signal(false);
 
+  selectedPatientId = '';
+  selectedServiceId = '';
   selectedDoctorId = '';
   selectedDate = new Date().toISOString().split('T')[0];
 
   constructor() {
-    this.loadDoctors();
+    this.loadPatients();
+    this.loadServices();
   }
 
-  loadDoctors() {
-    this.schedulingService.getDoctors().subscribe(data => {
-      this.doctors.set(data);
-    });
+  loadPatients() {
+    this.schedulingService.getPatients().subscribe(data => this.patients.set(data));
+  }
+
+  loadServices() {
+    this.schedulingService.getServices().subscribe(data => this.services.set(data));
+  }
+
+  onServiceChange() {
+    this.selectedDoctorId = '';
+    this.slots.set([]);
+    if (this.selectedServiceId) {
+      this.schedulingService.getDoctors(this.selectedServiceId).subscribe(data => {
+        this.doctors.set(data);
+      });
+    } else {
+      this.doctors.set([]);
+    }
   }
 
   loadSlots() {
@@ -266,21 +321,29 @@ export class DoctorBookingComponent {
   }
 
   selectSlot(slot: any) {
-    // Implement booking logic/modal here
-    const patientId = 'demo-patient-123'; // Logic to select patient
-    if (confirm(`Book appointment at ${this.formatTime(slot.start)}?`)) {
+    if (!this.selectedPatientId) {
+      alert('Please select a patient first.');
+      return;
+    }
+
+    if (confirm(`Book appointment for ${this.getSelectedPatientName()} at ${this.formatTime(slot.start)}?`)) {
       this.schedulingService.bookAppointment({
         doctorId: this.selectedDoctorId,
-        patientId,
+        patientId: this.selectedPatientId,
         startDateTime: slot.start,
         endDateTime: slot.end
       }).subscribe({
         next: () => {
           alert('Successfully booked!');
-          this.loadSlots(); // Refresh
+          this.loadSlots();
         },
         error: (err) => alert('Error: ' + err.error.message)
       });
     }
+  }
+
+  private getSelectedPatientName(): string {
+    const p = this.patients().find(pat => pat.id === this.selectedPatientId);
+    return p ? p.name : 'Selected Patient';
   }
 }

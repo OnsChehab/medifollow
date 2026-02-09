@@ -9,8 +9,8 @@ export class UsersController {
     constructor(private readonly usersService: UsersService) { }
 
     @Get()
-    findAll(@Query('role') role?: string): Promise<User[]> {
-        return this.usersService.findAll(role);
+    findAll(@Query('role') role?: string, @Query('serviceId') serviceId?: string): Promise<User[]> {
+        return this.usersService.findAll(role, serviceId);
     }
 
     @Get(':id')

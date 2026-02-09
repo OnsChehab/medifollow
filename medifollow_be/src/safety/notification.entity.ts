@@ -1,9 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, CreateDateColumn } from 'typeorm';
+import { Entity, Column, ObjectIdColumn, ObjectId, ManyToOne, JoinColumn, CreateDateColumn } from 'typeorm';
 import { User } from '../users/user.entity';
 
 @Entity('notifications')
 export class Notification {
-    @PrimaryGeneratedColumn('uuid')
+    @ObjectIdColumn()
+    _id: ObjectId;
+
+    @Column()
     id: string;
 
     @ManyToOne(() => User)

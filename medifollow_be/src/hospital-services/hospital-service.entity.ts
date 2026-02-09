@@ -1,8 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
+import { Entity, Column, ObjectIdColumn, ObjectId, CreateDateColumn } from 'typeorm';
 
 @Entity('hospital_services')
 export class HospitalService {
-    @PrimaryGeneratedColumn('uuid')
+    @ObjectIdColumn()
+    _id: ObjectId;
+
+    @Column()
     id: string;
 
     @Column()

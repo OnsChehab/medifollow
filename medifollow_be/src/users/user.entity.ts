@@ -1,9 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from 'typeorm';
+import { Entity, Column, ObjectIdColumn, ObjectId, CreateDateColumn } from 'typeorm';
 import { UserRole } from '../common/enums/enums';
 
 @Entity('users')
 export class User {
-    @PrimaryGeneratedColumn('uuid')
+    @ObjectIdColumn()
+    _id: ObjectId;
+
+    @Column()
     id: string;
 
     @Column({ unique: true })
@@ -19,10 +22,12 @@ export class User {
     last_name: string;
 
     @Column({
-        type: 'enum',
         enum: UserRole,
     })
     role: UserRole;
+
+    @Column({ nullable: true })
+    hospital_serviceId: string;
 
     @Column({ default: true })
     is_active: boolean;
