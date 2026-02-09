@@ -1,0 +1,47 @@
+<div class="d-flex wrapper" [class.toggled]="isSidebarCollapsed">
+    <!-- Sidebar -->
+    <div class="border-end" id="sidebar-wrapper">
+        <div class="sidebar-heading text-center py-4 fs-4 fw-bold text-uppercase border-bottom">
+            <i class="fas fa-heartbeat me-2"></i>My Health
+        </div>
+        <div class="list-group list-group-flush my-3">
+            <a routerLink="/patient/dashboard"
+                class="list-group-item list-group-item-action bg-transparent second-text active">
+                <i class="fas fa-home me-2"></i>Home
+            </a>
+            <div class="list-group-item bg-transparent text-muted small text-uppercase mt-2">Actions</div>
+            <a routerLink="/patient/vitals"
+                class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                <i class="fas fa-heartbeat me-2"></i>Enter Vitals
+            </a>
+            <a routerLink="/patient/symptoms"
+                class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                <i class="fas fa-notes-medical me-2"></i>Report Symptoms
+            </a>
+            <div class="list-group-item bg-transparent text-muted small text-uppercase mt-2">Profile</div>
+            <a routerLink="/patient/history"
+                class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                <i class="fas fa-history me-2"></i>My History
+            </a>
+            <a routerLink="/auth/login"
+                class="list-group-item list-group-item-action bg-transparent text-danger fw-bold mt-5">
+                <i class="fas fa-power-off me-2"></i>Logout
+            </a>
+        </div>
+    </div>
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 px-4 border-bottom shadow-sm">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-align-left text-teal fs-4 me-3" (click)="toggleSidebar()" style="cursor: pointer;"></i>
+                <h2 class="fs-4 m-0 text-navy fw-800">Patient Portal</h2>
+            </div>
+            <div class="ms-auto">
+                <span class="fw-bold text-dark">Welcome, {{ authService.currentUser()?.name }}</span>
+            </div>
+        </nav>
+        <div class="container-fluid px-4">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

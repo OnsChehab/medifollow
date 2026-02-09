@@ -1,0 +1,51 @@
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-secondary fw-bold"><i class="fas fa-shield-alt me-2"></i>Quality & Compliance</h2>
+        <button class="btn btn-outline-secondary"><i class="fas fa-download me-2"></i>Download Report</button>
+    </div>
+
+    <!-- KPI Cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm bg-light">
+                <div class="card-body">
+                    <h6 class="text-muted text-uppercase small fw-bold">Daily Actions</h6>
+                    <h2 class="display-5 fw-bold mb-0 text-dark">{{ stats().totalActionsToday }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm bg-danger text-white">
+                <div class="card-body">
+                    <h6 class="text-white text-uppercase small fw-bold opacity-75">Security Alerts</h6>
+                    <h2 class="display-5 fw-bold mb-0">{{ stats().securityAlerts }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm bg-info text-white">
+                <div class="card-body">
+                    <h6 class="text-white text-uppercase small fw-bold opacity-75">Active Users</h6>
+                    <h2 class="display-5 fw-bold mb-0">{{ stats().activeUsers }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Component Placeholder -->
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-white py-3">
+            <h5 class="mb-0 fw-bold">System Status</h5>
+        </div>
+        <div class="card-body">
+            <div class="alert alert-success d-flex align-items-center" role="alert">
+                <i class="fas fa-check-circle fs-4 me-3"></i>
+                <div>
+                    <strong>System Healthy</strong> All services are operational. Compliance logging is active.
+                </div>
+            </div>
+            <p class="text-muted">Navigate to <a routerLink="/auditor/logs" class="fw-bold text-decoration-none">Audit
+                    Logs</a> for detailed traceability.</p>
+        </div>
+    </div>
+</div>

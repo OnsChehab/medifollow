@@ -1,0 +1,111 @@
+<div class="container-fluid py-4 bg-ice min-vh-100">
+    <div class="d-flex justify-content-between align-items-center mb-4 px-2">
+        <div>
+            <h2 class="text-navy fw-extrabold mb-1"><i class="fas {{ icon() }} me-2 text-teal"></i>{{ title() }}</h2>
+            <p class="text-muted small mb-0">Overview of patients in your care</p>
+        </div>
+        <div class="d-flex gap-2">
+            <button class="btn btn-outline-primary btn-sm rounded-pill px-3 shadow-nm"><i
+                    class="fas fa-filter me-2"></i>Filter</button>
+            <button class="btn btn-primary btn-sm rounded-pill px-3 shadow-nm"><i class="fas fa-plus me-2"></i>Add
+                Patient</button>
+        </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm bg-danger text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Critical</h5>
+                    <p class="display-6 fw-bold mb-0">1</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm bg-warning text-dark">
+                <div class="card-body">
+                    <h5 class="card-title">Warning</h5>
+                    <p class="display-6 fw-bold mb-0">1</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Stable</h5>
+                    <p class="display-6 fw-bold mb-0">2</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Patients Table -->
+    <div class="card shadow border-0">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="ps-4">Patient</th>
+                            <th>Age/Gender</th>
+                            <th>Unit</th>
+                            <th>Last Update</th>
+                            <th>Status</th>
+                            <th class="text-end pe-4">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (patient of patients(); track patient.id) {
+                        <tr>
+                            <td class="ps-4">
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar bg-primary text-white rounded-circle me-3 d-flex align-items-center justify-content-center"
+                                        style="width: 40px; height: 40px;">
+                                        {{ patient.name.charAt(0) }}
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0 fw-bold">{{ patient.name }}</h6>
+                                        <small class="text-muted">ID: #{{ patient.id }}</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{ patient.age }} / {{ patient.gender }}</td>
+                            <td><span class="badge bg-light text-dark border">{{ patient.unit }}</span></td>
+                            <td>{{ patient.lastVitalDate | date:'short' }}</td>
+                            <td>
+                                @if(patient.status === 'CRITICAL') {
+                                <span class="badge bg-danger">CRITICAL</span>
+                                } @else if(patient.status === 'WARNING') {
+                                <span class="badge bg-warning text-dark">WARNING</span>
+                                } @else {
+                                <span class="badge bg-success">NORMAL</span>
+                                }
+                            </td>
+                            <td class="text-end pe-4">
+                                @if (authService.currentUser()?.role === 'NURSE') {
+                                <div class="btn-group">
+                                    <a [routerLink]="['/nurse/vitals']" [queryParams]="{patientId: patient.id}"
+                                        class="btn btn-sm btn-outline-danger" title="Enter Vitals">
+                                        <i class="fas fa-heartbeat"></i>
+                                    </a>
+                                    <a [routerLink]="['/nurse/symptoms']" [queryParams]="{patientId: patient.id}"
+                                        class="btn btn-sm btn-outline-info" title="Report Symptoms">
+                                        <i class="fas fa-notes-medical"></i>
+                                    </a>
+                                </div>
+                                } @else {
+                                <a [routerLink]="['/doctor/patients', patient.id]"
+                                    class="btn btn-sm btn-outline-primary">
+                                    View Details
+                                </a>
+                                }
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

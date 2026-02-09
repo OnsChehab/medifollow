@@ -1,0 +1,42 @@
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-secondary fw-bold"><i class="fas fa-file-medical me-2"></i>Questionnaire Templates</h2>
+        <button class="btn btn-primary shadow-sm"><i class="fas fa-plus me-2"></i>Create Template</button>
+    </div>
+
+    <div class="row g-4">
+        @for (template of templates(); track template.id) {
+        <div class="col-md-6">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-2">
+                        <h5 class="fw-bold text-dark">{{ template.title }}</h5>
+                        <span class="badge bg-light text-secondary border">{{ template.questionsCount }}
+                            Questions</span>
+                    </div>
+                    <p class="text-muted small mb-3">{{ template.description }}</p>
+                    <div class="d-flex justify-content-between align-items-center mt-auto">
+                        <small class="text-muted">Last updated: {{ template.lastUpdated | date:'shortDate' }}</small>
+                        <div class="btn-group">
+                            <button class="btn btn-sm btn-outline-primary"><i class="fas fa-eye me-1"></i>Edit</button>
+                            <button class="btn btn-sm btn-outline-secondary"><i
+                                    class="fas fa-copy me-1"></i>Clone</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+
+    <div class="mt-5 card bg-light border-0 shadow-sm">
+        <div class="card-body py-4">
+            <div class="text-center">
+                <i class="fas fa-tools fs-1 text-muted opacity-25 mb-3"></i>
+                <h5 class="text-muted">Dynamic Builder Interface</h5>
+                <p class="small text-muted mb-0">The drag-and-drop questionnaire editor is a modular sub-component for
+                    template editing.</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="d-flex wrapper" [class.toggled]="isSidebarCollapsed">
+    <div class="bg-white border-end" id="sidebar-wrapper">
+        <div class="sidebar-heading text-center py-4 fs-4 fw-bold text-uppercase border-bottom">
+            <i class="fas fa-stethoscope me-2"></i>Doctor Portal
+        </div>
+        <div class="list-group list-group-flush my-3">
+            <a routerLink="/doctor/dashboard"
+                class="list-group-item list-group-item-action bg-transparent second-text active">
+                <i class="fas fa-user-md me-2"></i>My Patients
+            </a>
+            <a routerLink="/doctor/schedule"
+                class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                <i class="fas fa-calendar-alt me-2"></i>Schedule
+            </a>
+            <a routerLink="/doctor/messages"
+                class="list-group-item list-group-item-action bg-transparent second-text fw-bold">
+                <i class="fas fa-comments me-2"></i>Messages
+            </a>
+            <a routerLink="/auth/login"
+                class="list-group-item list-group-item-action bg-transparent text-danger fw-bold mt-5">
+                <i class="fas fa-power-off me-2"></i>Logout
+            </a>
+        </div>
+    </div>
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 px-4 border-bottom shadow-sm">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-align-left text-teal fs-4 me-3" (click)="toggleSidebar()" style="cursor: pointer;"></i>
+                <h2 class="fs-4 m-0 text-navy fw-800">Doctor Workspace</h2>
+            </div>
+            <div class="ms-auto">
+                <span class="fw-bold text-secondary">Dr. {{ authService.currentUser()?.name }}</span>
+            </div>
+        </nav>
+        <div class="container-fluid px-4">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

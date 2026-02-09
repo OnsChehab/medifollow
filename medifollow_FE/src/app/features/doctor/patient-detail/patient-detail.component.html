@@ -1,0 +1,96 @@
+<div class="container-fluid py-4" *ngIf="history()">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <a routerLink="/app/doctor/patients" class="text-decoration-none text-muted mb-2 d-inline-block">
+                <i class="fas fa-arrow-left me-2"></i>Back to List
+            </a>
+            <h2 class="fw-bold">Patient Analysis</h2>
+        </div>
+        <div class="d-flex gap-2">
+            <button class="btn btn-outline-danger" (click)="validateAlert('CRITICAL')">
+                <i class="fas fa-exclamation-triangle me-2"></i>Flag Crisis
+            </button>
+            <button class="btn btn-success" (click)="validateAlert('NORMAL')">
+                <i class="fas fa-check-circle me-2"></i>Validate Stable
+            </button>
+        </div>
+    </div>
+
+    <!-- Alert Success Message -->
+    <div *ngIf="alertMessage()" class="alert alert-success d-flex align-items-center mb-4">
+        <i class="fas fa-check-circle me-2 fs-4"></i>
+        <div>{{ alertMessage() }}</div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Vitals History -->
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 fw-bold"><i class="fas fa-heartbeat text-danger me-2"></i>Vitals History</h5>
+                    <button class="btn btn-sm btn-outline-secondary">Export CSV</button>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th class="ps-4">Timestamp</th>
+                                    <th>HR (bpm)</th>
+                                    <th>BP (mmHg)</th>
+                                    <th>Temp (°C)</th>
+                                    <th>Weight (kg)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (record of history()?.vitals; track record.id) {
+                                <tr>
+                                    <td class="ps-4 text-muted">{{ record.timestamp | date:'MMM d, HH:mm' }}</td>
+                                    <td [class.text-danger]="record.heartRate > 100">{{ record.heartRate }}</td>
+                                    <td>{{ record.systolicBP }}/{{ record.diastolicBP }}</td>
+                                    <td>{{ record.temperature | number:'1.1-1' }}</td>
+                                    <td>{{ record.weight }}</td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analysis & Actions -->
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white py-3 border-bottom">
+                    <h5 class="mb-0 fw-bold">Trend Analysis</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="display-6 fw-bold text-success me-3">Stable</div>
+                        <i class="fas fa-chart-line fs-2 text-muted"></i>
+                    </div>
+                    <p class="text-muted">Patient vitals have been consistent over the last 7 days. No significant
+                        deviation in heart rate or blood pressure.</p>
+                </div>
+            </div>
+
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white py-3 border-bottom">
+                    <h5 class="mb-0 fw-bold">Quick Actions</h5>
+                </div>
+                <div class="list-group list-group-flush">
+                    <button class="list-group-item list-group-item-action py-3">
+                        <i class="fas fa-comment-medical me-2 text-primary"></i> Send Message to Patient
+                    </button>
+                    <button class="list-group-item list-group-item-action py-3">
+                        <i class="fas fa-file-prescription me-2 text-primary"></i> Adjust Medication
+                    </button>
+                    <button class="list-group-item list-group-item-action py-3">
+                        <i class="fas fa-calendar-alt me-2 text-primary"></i> Schedule Follow-up
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

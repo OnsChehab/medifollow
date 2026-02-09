@@ -1,0 +1,89 @@
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4 text-dark">
+        <h2 class="fw-bold"><i class="fas fa-globe me-2 text-primary"></i>Global Platform Overview</h2>
+        <span class="badge bg-success py-2 px-3 shadow-sm">System Online | {{ stats().systemHealth }}% Uptime</span>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="card bg-white text-dark border-0 shadow-sm border-start border-5 border-primary">
+                <div class="card-body py-4">
+                    <h6 class="text-uppercase small text-muted fw-bold">Connected Hospitals</h6>
+                    <h2 class="display-6 fw-bold mb-0 text-primary">{{ stats().totalHospitals }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-white text-dark border-0 shadow-sm border-start border-5 border-info">
+                <div class="card-body py-4">
+                    <h6 class="text-uppercase small text-muted fw-bold">Managed Users</h6>
+                    <h2 class="display-6 fw-bold mb-0 text-info">{{ stats().totalUsers }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-white text-dark border-0 shadow-sm border-start border-5 border-success">
+                <div class="card-body py-4">
+                    <h6 class="text-uppercase small text-muted fw-bold">Active Sessions</h6>
+                    <h2 class="display-6 fw-bold mb-0 text-success">{{ stats().activeSessions }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-white text-dark border-0 shadow-sm border-start border-5 border-warning">
+                <div class="card-body py-4">
+                    <h6 class="text-uppercase small text-muted fw-bold">Pending Requests</h6>
+                    <h2 class="display-6 fw-bold mb-0 text-warning">12</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card bg-white text-dark border-0 shadow-sm h-100">
+                <div class="card-header border-bottom bg-light py-3">
+                    <h5 class="mb-0 fw-bold text-dark">Platform Entities</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group list-group-flush bg-transparent">
+                        <a routerLink="/super-admin/users"
+                            class="list-group-item list-group-item-action bg-transparent text-dark border-bottom d-flex justify-content-between align-items-center">
+                            <div><i class="fas fa-users-cog me-3 text-info"></i>Manage accounts and roles</div>
+                            <i class="fas fa-chevron-right small opacity-50"></i>
+                        </a>
+                        <a routerLink="/super-admin/units"
+                            class="list-group-item list-group-item-action bg-transparent text-dark border-bottom d-flex justify-content-between align-items-center">
+                            <div><i class="fas fa-hospital me-3 text-primary"></i>Hospital wards and services</div>
+                            <i class="fas fa-chevron-right small opacity-50"></i>
+                        </a>
+                        <a routerLink="/super-admin/audit"
+                            class="list-group-item list-group-item-action bg-transparent text-dark border-0 d-flex justify-content-between align-items-center">
+                            <div><i class="fas fa-user-secret me-3 text-danger"></i>Full traceability logs</div>
+                            <i class="fas fa-chevron-right small opacity-50"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card bg-white text-dark border-0 shadow-sm h-100">
+                <div class="card-header border-bottom bg-light py-3">
+                    <h5 class="mb-0 text-dark fw-bold"><i
+                            class="fas fa-exclamation-triangle me-2 text-warning"></i>Critical Items
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-light border border-warning text-dark mb-3 shadow-sm border-3">
+                        <i class="fas fa-database me-2 text-warning"></i> Database backup pending for 48h.
+                    </div>
+                    <div class="alert alert-light border border-danger text-dark mb-0 shadow-sm border-3">
+                        <i class="fas fa-server me-2 text-danger"></i> Latency spike detected in Unit: Pediatrics.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

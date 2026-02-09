@@ -1,0 +1,101 @@
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4 text-dark">
+        <h2 class="fw-bold"><i class="fas fa-chart-line me-2"></i>Status Overlook</h2>
+        <div class="dropdown">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                All Units
+            </button>
+        </div>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm bg-primary text-white">
+                <div class="card-body">
+                    <h6 class="text-uppercase small opacity-75">Active Patients</h6>
+                    <h2 class="display-6 fw-bold mb-0">1,248</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm bg-success text-white">
+                <div class="card-body">
+                    <h6 class="text-uppercase small opacity-75">Medical Staff</h6>
+                    <h2 class="display-6 fw-bold mb-0">84</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm bg-warning text-dark">
+                <div class="card-body">
+                    <h6 class="text-uppercase small opacity-75">Unresolved Alerts</h6>
+                    <h2 class="display-6 fw-bold mb-0">15</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm bg-info text-white">
+                <div class="card-body">
+                    <h6 class="text-uppercase small opacity-75">Adherence Rate</h6>
+                    <h2 class="display-6 fw-bold mb-0">92%</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Secondary Info -->
+    <div class="row g-4">
+        <div class="col-md-8">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-white py-3 border-0">
+                    <h5 class="mb-0 fw-bold">Recent Deployments</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm align-middle">
+                            <thead class="text-muted small border-0">
+                                <tr>
+                                    <th>Template Name</th>
+                                    <th>Unit</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Post-Op Recovery</td>
+                                    <td>Cardiology</td>
+                                    <td><span class="badge bg-success">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Diabetes Intake</td>
+                                    <td>Endocrinology</td>
+                                    <td><span class="badge bg-success">Active</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm bg-light h-100">
+                <div class="card-body">
+                    <h6 class="fw-bold mb-3"><i class="fas fa-history me-2"></i>Platform Logs</h6>
+                    <ul class="list-unstyled small mb-0">
+                        <li class="mb-2 border-bottom pb-2">
+                            <span class="text-primary d-block">Nurse Jackie</span>
+                            <span class="text-muted">Updated patient vitals (#PAT-122)</span>
+                        </li>
+                        <li class="mb-2 border-bottom pb-2">
+                            <span class="text-primary d-block">Admin Ops</span>
+                            <span class="text-muted">Created 'Summer Survey' template</span>
+                        </li>
+                    </ul>
+                    <a routerLink="/admin/alerts" class="btn btn-link btn-sm p-0 mt-2 text-decoration-none">View all
+                        logs -></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+@if (authService.currentUser()?.role === 'PATIENT') {
+<app-patient-dashboard></app-patient-dashboard>
+} @else if (isMedical()) {
+<app-patient-list></app-patient-list>
+} @else {
+<app-admin-dashboard></app-admin-dashboard>
+}
