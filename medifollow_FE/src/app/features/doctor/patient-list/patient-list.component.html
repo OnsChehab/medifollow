@@ -1,103 +1,119 @@
 <div class="container-fluid py-4 bg-ice min-vh-100">
-    <div class="d-flex justify-content-between align-items-center mb-4 px-2">
+    <div class="d-flex justify-content-between align-items-end mb-5 px-2">
         <div>
-            <h2 class="text-navy fw-extrabold mb-1"><i class="fas {{ icon() }} me-2 text-teal"></i>{{ title() }}</h2>
-            <p class="text-muted small mb-0">Overview of patients in your care</p>
+            <span class="text-teal fw-bold text-uppercase small mb-2 d-block">Clinical Overview</span>
+            <h1 class="text-navy fw-extrabold mb-1"><i class="fas {{ icon() }} me-2"></i>{{ title() }}</h1>
+            <p class="text-muted mb-0">Monitor and manage clinical updates for patients in your care.</p>
         </div>
-        <div class="d-flex gap-2">
-            <button class="btn btn-outline-primary btn-sm rounded-pill px-3 shadow-nm"><i
-                    class="fas fa-filter me-2"></i>Filter</button>
-            <button class="btn btn-primary btn-sm rounded-pill px-3 shadow-nm"><i class="fas fa-plus me-2"></i>Add
+        <div class="d-flex gap-3">
+            <button class="btn btn-outline-navy rounded-pill px-4"><i class="fas fa-filter me-2"></i>Filter</button>
+            <button class="btn btn-premium-teal shadow-nm px-4"><i class="fas fa-plus me-2"></i>Register New
                 Patient</button>
         </div>
     </div>
 
-    <!-- Stats Cards -->
-    <div class="row g-3 mb-4">
+    <!-- Quick Stats Hub -->
+    <div class="row g-4 mb-5">
         <div class="col-md-3">
-            <div class="card border-0 shadow-sm bg-danger text-white">
-                <div class="card-body">
-                    <h5 class="card-title">Critical</h5>
-                    <p class="display-6 fw-bold mb-0">1</p>
+            <div class="card card-premium border-0 bg-white shadow-sm overflow-hidden"
+                style="border-top: 4px solid var(--danger-medical) !important;">
+                <div class="card-body p-4 text-center">
+                    <p class="text-muted small text-uppercase fw-bold mb-2">Critical Priority</p>
+                    <p class="display-5 fw-bold text-danger mb-0">1</p>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card border-0 shadow-sm bg-warning text-dark">
-                <div class="card-body">
-                    <h5 class="card-title">Warning</h5>
-                    <p class="display-6 fw-bold mb-0">1</p>
+            <div class="card card-premium border-0 bg-white shadow-sm overflow-hidden"
+                style="border-top: 4px solid var(--warning-medical) !important;">
+                <div class="card-body p-4 text-center">
+                    <p class="text-muted small text-uppercase fw-bold mb-2">Attention Required</p>
+                    <p class="display-5 fw-bold text-warning mb-0">1</p>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card border-0 shadow-sm bg-success text-white">
-                <div class="card-body">
-                    <h5 class="card-title">Stable</h5>
-                    <p class="display-6 fw-bold mb-0">2</p>
+            <div class="card card-premium border-0 bg-white shadow-sm overflow-hidden"
+                style="border-top: 4px solid var(--success-medical) !important;">
+                <div class="card-body p-4 text-center">
+                    <p class="text-muted small text-uppercase fw-bold mb-2">Stable Condition</p>
+                    <p class="display-5 fw-bold text-success mb-0">2</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card card-premium border-0 bg-navy text-white shadow-sm">
+                <div class="card-body p-4 text-center">
+                    <p class="opacity-75 small text-uppercase fw-bold mb-2">Total Patients</p>
+                    <p class="display-5 fw-bold mb-0">4</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Patients Table -->
-    <div class="card shadow border-0">
+    <!-- Patients Repository -->
+    <div class="card card-premium shadow-lg border-0 bg-white">
         <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table table-hover align-middle mb-0">
-                    <thead class="bg-light">
+                    <thead class="bg-ice">
                         <tr>
-                            <th class="ps-4">Patient</th>
-                            <th>Age/Gender</th>
-                            <th>Unit</th>
-                            <th>Last Update</th>
-                            <th>Status</th>
-                            <th class="text-end pe-4">Actions</th>
+                            <th class="ps-4 py-4 text-navy small text-uppercase fw-bold border-0">Patient Identity</th>
+                            <th class="text-navy small text-uppercase fw-bold border-0">Demographics</th>
+                            <th class="text-navy small text-uppercase fw-bold border-0">Assigned Unit</th>
+                            <th class="text-navy small text-uppercase fw-bold border-0">Latest Clinical Update</th>
+                            <th class="text-navy small text-uppercase fw-bold border-0">Clinical Status</th>
+                            <th class="text-end pe-4 text-navy small text-uppercase fw-bold border-0">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @for (patient of patients(); track patient.id) {
-                        <tr>
-                            <td class="ps-4">
+                        <tr class="clinical-row">
+                            <td class="ps-4 py-3">
                                 <div class="d-flex align-items-center">
-                                    <div class="avatar bg-primary text-white rounded-circle me-3 d-flex align-items-center justify-content-center"
-                                        style="width: 40px; height: 40px;">
+                                    <div class="avatar bg-ice text-teal fw-bold rounded-circle me-3 d-flex align-items-center justify-content-center border"
+                                        style="width: 48px; height: 48px;">
                                         {{ patient.name.charAt(0) }}
                                     </div>
                                     <div>
-                                        <h6 class="mb-0 fw-bold">{{ patient.name }}</h6>
-                                        <small class="text-muted">ID: #{{ patient.id }}</small>
+                                        <h6 class="mb-0 fw-bold text-navy">{{ patient.name }}</h6>
+                                        <small class="text-muted">NHS ID: #{{ patient.id }}</small>
                                     </div>
                                 </div>
                             </td>
-                            <td>{{ patient.age }} / {{ patient.gender }}</td>
-                            <td><span class="badge bg-light text-dark border">{{ patient.unit }}</span></td>
-                            <td>{{ patient.lastVitalDate | date:'short' }}</td>
+                            <td class="text-navy fw-medium">{{ patient.age }} / {{ patient.gender }}</td>
+                            <td><span class="badge bg-ice text-navy px-3 py-2"
+                                    style="border: 1px solid var(--teal) !important;">{{ patient.unit }}</span></td>
+                            <td class="text-muted fw-semibold small">{{ patient.lastVitalDate | date:'MMM d, HH:mm' }}
+                            </td>
                             <td>
                                 @if(patient.status === 'CRITICAL') {
-                                <span class="badge bg-danger">CRITICAL</span>
+                                <span class="badge bg-danger px-3 py-2 rounded-pill"><i
+                                        class="fas fa-exclamation-triangle me-1"></i> CRITICAL</span>
                                 } @else if(patient.status === 'WARNING') {
-                                <span class="badge bg-warning text-dark">WARNING</span>
+                                <span class="badge bg-warning text-dark px-3 py-2 rounded-pill"><i
+                                        class="fas fa-exclamation-circle me-1"></i> WARNING</span>
                                 } @else {
-                                <span class="badge bg-success">NORMAL</span>
+                                <span class="badge bg-success px-3 py-2 rounded-pill"><i
+                                        class="fas fa-check-circle me-1"></i> STABLE</span>
                                 }
                             </td>
                             <td class="text-end pe-4">
                                 @if (authService.currentUser()?.role === 'NURSE') {
-                                <div class="btn-group">
+                                <div class="btn-group shadow-sm rounded-pill overflow-hidden border">
                                     <a [routerLink]="['/nurse/vitals']" [queryParams]="{patientId: patient.id}"
-                                        class="btn btn-sm btn-outline-danger" title="Enter Vitals">
+                                        class="btn btn-sm btn-white text-danger px-3" title="Log Vitals">
                                         <i class="fas fa-heartbeat"></i>
                                     </a>
                                     <a [routerLink]="['/nurse/symptoms']" [queryParams]="{patientId: patient.id}"
-                                        class="btn btn-sm btn-outline-info" title="Report Symptoms">
+                                        class="btn btn-sm btn-white text-info px-3" title="Log Symptoms">
                                         <i class="fas fa-notes-medical"></i>
                                     </a>
                                 </div>
                                 } @else {
                                 <a [routerLink]="['/doctor/patients', patient.id]"
-                                    class="btn btn-sm btn-outline-primary">
-                                    View Details
+                                    class="btn btn-premium-teal btn-sm shadow-nm">
+                                    Full Chart <i class="fas fa-chevron-right ms-1 small"></i>
                                 </a>
                                 }
                             </td>

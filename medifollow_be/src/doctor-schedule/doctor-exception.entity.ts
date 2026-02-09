@@ -1,10 +1,14 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, ObjectIdColumn, ObjectId } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Entity('doctor_exceptions')
 export class DoctorException {
     @ApiProperty()
-    @PrimaryGeneratedColumn('uuid')
+    @ObjectIdColumn()
+    _id: ObjectId;
+
+    @ApiProperty()
+    @Column()
     id: string;
 
     @ApiProperty()
@@ -12,11 +16,11 @@ export class DoctorException {
     doctorId: string;
 
     @ApiProperty()
-    @Column({ type: 'timestamp' })
+    @Column()
     startDateTime: Date;
 
     @ApiProperty()
-    @Column({ type: 'timestamp' })
+    @Column()
     endDateTime: Date;
 
     @ApiProperty()

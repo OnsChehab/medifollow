@@ -1,10 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, CreateDateColumn } from 'typeorm';
+import { Entity, Column, ObjectIdColumn, ObjectId, ManyToOne, JoinColumn, CreateDateColumn } from 'typeorm';
 import { User } from '../users/user.entity';
 import { SeverityLevel } from '../common/enums/enums';
 
 @Entity('alerts')
 export class Alert {
-    @PrimaryGeneratedColumn('uuid')
+    @ObjectIdColumn()
+    _id: ObjectId;
+
+    @Column()
     id: string;
 
     @ManyToOne(() => User)
@@ -15,7 +18,6 @@ export class Alert {
     type: string; // 'VITAL', 'SYMPTOM', 'QUESTIONNAIRE', 'MISSING'
 
     @Column({
-        type: 'enum',
         enum: SeverityLevel,
     })
     severity: SeverityLevel;
@@ -29,7 +31,7 @@ export class Alert {
     @CreateDateColumn()
     triggered_at: Date;
 
-    @Column({ type: 'timestamp', nullable: true })
+    @Column({ nullable: true })
     acknowledged_at: Date;
 
     @ManyToOne(() => User, { nullable: true })

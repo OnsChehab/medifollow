@@ -1,95 +1,126 @@
-<div class="container-fluid py-4">
-    <div class="row mb-4">
+<div class="container-fluid py-4 bg-ice">
+    <div class="row mb-5 px-2">
         <div class="col-12">
-            <h2 class="text-secondary fw-bold">Hello, {{ currentUser()?.name }}</h2>
-            <p class="text-muted">Welcome to your health dashboard. Stay on top of your recovery.</p>
+            <h1 class="text-navy fw-bold mb-1">Hello, {{ currentUser()?.name }}</h1>
+            <p class="text-muted fs-5">Welcome back. Here is a summary of your recovery progress.</p>
         </div>
     </div>
 
-    <!-- Quick Actions -->
-    <div class="row g-4 mb-4">
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 border-0 shadow-sm bg-primary text-white">
-                <div class="card-body d-flex flex-column justify-content-between p-4">
-                    <div>
-                        <i class="fas fa-heartbeat fs-1 mb-3"></i>
-                        <h4 class="card-title fw-bold">Daily Vitals</h4>
-                        <p class="card-text opacity-75">Track your Blood Pressure, Heart Rate, and Weight.</p>
+    <!-- Highlighted Action: Daily Vitals -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card card-premium bg-white overflow-hidden border-0 shadow-lg"
+                style="border-left: 6px solid var(--teal) !important;">
+                <div
+                    class="card-body p-4 p-lg-5 d-flex flex-column flex-lg-row align-items-center justify-content-between">
+                    <div class="d-flex align-items-center mb-4 mb-lg-0">
+                        <div class="icon-box bg-ice text-teal rounded-circle d-flex align-items-center justify-content-center me-4"
+                            style="width: 80px; height: 80px;">
+                            <i class="fas fa-heartbeat fs-1"></i>
+                        </div>
+                        <div>
+                            <h2 class="h3 mb-1">Time for your Daily Vitals?</h2>
+                            <p class="text-muted mb-0">Keeping regular records helps your care team stay informed.</p>
+                        </div>
                     </div>
-                    <a routerLink="/patient/vitals" class="btn btn-light rounded-pill mt-3">Enter Vitals</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 border-0 shadow-sm bg-info text-white">
-                <div class="card-body d-flex flex-column justify-content-between p-4">
-                    <div>
-                        <i class="fas fa-notes-medical fs-1 mb-3"></i>
-                        <h4 class="card-title fw-bold">Symptom Log</h4>
-                        <p class="card-text opacity-75">Report any discomfort or changes in your condition.</p>
-                    </div>
-                    <a routerLink="/patient/symptoms" class="btn btn-light rounded-pill mt-3">Report Symptoms</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 border-0 shadow-sm bg-warning text-dark">
-                <div class="card-body d-flex flex-column justify-content-between p-4">
-                    <div>
-                        <i class="fas fa-calendar-alt fs-1 mb-3"></i>
-                        <h4 class="card-title fw-bold">Next Follow-up</h4>
-                        <p class="card-text opacity-75">Scheduled for: <strong>Feb 15, 2026</strong></p>
-                    </div>
-                    <button class="btn btn-dark rounded-pill mt-3">View Details</button>
+                    <a routerLink="/patient/vitals" class="btn btn-premium-teal btn-lg px-5">Enter Vitals Now</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Recent History -->
+    <!-- Secondary Actions -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-6">
+            <div class="card card-premium h-100 bg-white border-0">
+                <div class="card-body d-flex flex-column p-4">
+                    <div class="mb-4">
+                        <i class="fas fa-notes-medical fs-2 text-info mb-3"></i>
+                        <h3 class="h4">Symptom Log</h3>
+                        <p class="text-muted">Report any discomfort or changes in your condition immediately.</p>
+                    </div>
+                    <a routerLink="/patient/symptoms" class="btn btn-outline-info rounded-pill mt-auto">Report
+                        Symptoms</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card card-premium h-100 bg-white border-0">
+                <div class="card-body d-flex flex-column p-4">
+                    <div class="mb-4">
+                        <i class="fas fa-calendar-check fs-2 text-warning mb-3"></i>
+                        <h3 class="h4">Next Follow-up</h3>
+                        <p class="text-muted">Your next clinical review is scheduled for:</p>
+                        <p class="h5 fw-bold text-navy">Feb 15, 2026 at 10:30 AM</p>
+                    </div>
+                    <button class="btn btn-outline-warning text-dark rounded-pill mt-auto">View Appointment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent History & Tips -->
     <div class="row">
         <div class="col-lg-8">
-            <div class="card border-0 shadow-sm mb-4">
-                <div class="card-header bg-white py-3 border-0">
-                    <h5 class="mb-0 fw-bold">Weekly Progress</h5>
+            <div class="card card-premium border-0 bg-white mb-4">
+                <div class="card-header bg-white py-4 px-4 border-0">
+                    <h3 class="h5 mb-0 fw-bold"><i class="fas fa-history me-2 text-teal"></i>Recent Vitals History</h3>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
                         <table class="table table-hover align-middle mb-0">
-                            <thead class="bg-light small text-uppercase">
+                            <thead class="bg-ice small text-uppercase text-muted">
                                 <tr>
-                                    <th class="ps-4 py-3">Date</th>
+                                    <th class="ps-4 py-3">Recorded At</th>
                                     <th>Blood Pressure</th>
                                     <th>Heart Rate</th>
-                                    <th>Status</th>
+                                    <th class="pe-4">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="ps-4">Today, 10:00 AM</td>
-                                    <td>120/80</td>
-                                    <td>72 bpm</td>
-                                    <td><span class="badge bg-success rounded-pill">Normal</span></td>
+                                    <td class="ps-4 fw-medium">Today, 10:00 AM</td>
+                                    <td>120/80 <span class="text-muted ms-1 small">mmHg</span></td>
+                                    <td>72 <span class="text-muted ms-1 small">bpm</span></td>
+                                    <td class="pe-4"><span
+                                            class="badge bg-success-medical rounded-pill px-3">Normal</span></td>
                                 </tr>
                                 <tr>
-                                    <td class="ps-4">Yesterday</td>
-                                    <td>122/82</td>
-                                    <td>75 bpm</td>
-                                    <td><span class="badge bg-success rounded-pill">Normal</span></td>
+                                    <td class="ps-4 fw-medium">Yesterday, 09:45 AM</td>
+                                    <td>122/82 <span class="text-muted ms-1 small">mmHg</span></td>
+                                    <td>75 <span class="text-muted ms-1 small">bpm</span></td>
+                                    <td class="pe-4"><span
+                                            class="badge bg-success-medical rounded-pill px-3">Normal</span></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
+                <div class="card-footer bg-white border-0 text-center py-3">
+                    <a href="#" class="btn btn-link text-teal text-decoration-none small fw-bold">View Full History <i
+                            class="fas fa-chevron-right ms-1"></i></a>
+                </div>
             </div>
         </div>
         <div class="col-lg-4">
-            <div class="card border-0 shadow-sm bg-light">
-                <div class="card-body">
-                    <h6 class="fw-bold mb-3"><i class="fas fa-lightbulb text-warning me-2"></i>Health Tips</h6>
-                    <div class="small">
-                        <p class="mb-2"><strong>Stay Hydrated:</strong> Aim for 8 glasses of water today.</p>
-                        <p class="mb-0"><strong>Gentle Movement:</strong> A 10-minute walk can improve circulation.</p>
+            <div class="card card-premium border-0 bg-navy text-white h-100">
+                <div class="card-body p-4">
+                    <h3 class="h5 fw-bold mb-4"><i class="fas fa-lightbulb text-warning me-2"></i>Daily Health Tips</h3>
+                    <div class="tip-item mb-4 d-flex">
+                        <i class="fas fa-check-circle text-teal me-3 mt-1"></i>
+                        <div>
+                            <p class="fw-bold mb-1">Stay Hydrated</p>
+                            <p class="small opacity-75 mb-0">Aim for at least 8 glasses of water to help your medication
+                                work effectively.</p>
+                        </div>
+                    </div>
+                    <div class="tip-item d-flex">
+                        <i class="fas fa-check-circle text-teal me-3 mt-1"></i>
+                        <div>
+                            <p class="fw-bold mb-1">Gentle Movement</p>
+                            <p class="small opacity-75 mb-0">A 10-minute walk improves circulation and boosts your mood.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,10 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, CreateDateColumn } from 'typeorm';
+import { Entity, Column, ObjectIdColumn, ObjectId, ManyToOne, JoinColumn, CreateDateColumn } from 'typeorm';
 import { Patient } from '../patients/patient.entity';
 import { SeverityLevel } from '../common/enums/enums';
 
 @Entity('symptoms')
 export class Symptom {
-    @PrimaryGeneratedColumn('uuid')
+    @ObjectIdColumn()
+    _id: ObjectId;
+
+    @Column()
     id: string;
 
     @ManyToOne(() => Patient)
@@ -15,7 +18,6 @@ export class Symptom {
     name: string;
 
     @Column({
-        type: 'enum',
         enum: SeverityLevel,
     })
     severity: SeverityLevel;
