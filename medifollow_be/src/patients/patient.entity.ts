@@ -11,7 +11,6 @@ export class Patient {
     id: string;
 
     @OneToOne(() => User)
-    @JoinColumn({ name: 'user_id' })
     user: User;
 
     @Column({ unique: true })
@@ -24,11 +23,9 @@ export class Patient {
     sex: string;
 
     @ManyToOne(() => HospitalService)
-    @JoinColumn({ name: 'service_id' })
     service: HospitalService;
 
     @ManyToOne(() => User, { nullable: true })
-    @JoinColumn({ name: 'assigned_physician_id' })
     assigned_physician: User;
 
     @Column({ nullable: true })

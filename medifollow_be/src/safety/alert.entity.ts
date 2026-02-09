@@ -11,7 +11,6 @@ export class Alert {
     id: string;
 
     @ManyToOne(() => User)
-    @JoinColumn({ name: 'reciever_id' })
     receiver: User;
 
     @Column()
@@ -35,6 +34,5 @@ export class Alert {
     acknowledged_at: Date;
 
     @ManyToOne(() => User, { nullable: true })
-    @JoinColumn({ name: 'acknowledged_by_id' })
     acknowledged_by: User;
 }

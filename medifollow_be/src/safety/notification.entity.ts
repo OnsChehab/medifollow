@@ -10,7 +10,6 @@ export class Notification {
     id: string;
 
     @ManyToOne(() => User)
-    @JoinColumn({ name: 'user_id' })
     user: User;
 
     @Column()

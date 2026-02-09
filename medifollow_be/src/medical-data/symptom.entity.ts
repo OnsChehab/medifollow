@@ -11,7 +11,6 @@ export class Symptom {
     id: string;
 
     @ManyToOne(() => Patient)
-    @JoinColumn({ name: 'patient_id' })
     patient: Patient;
 
     @Column()
