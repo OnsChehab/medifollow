@@ -11,11 +11,9 @@ export class QuestionnaireResponse {
     id: string;
 
     @ManyToOne(() => Questionnaire)
-    @JoinColumn({ name: 'questionnaire_id' })
     questionnaire: Questionnaire;
 
     @ManyToOne(() => Patient)
-    @JoinColumn({ name: 'patient_id' })
     patient: Patient;
 
     @Column({ nullable: true })

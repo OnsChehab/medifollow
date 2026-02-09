@@ -10,7 +10,6 @@ export class Questionnaire {
     id: string;
 
     @ManyToOne(() => HospitalService)
-    @JoinColumn({ name: 'service_id' })
     service: HospitalService;
 
     @Column()
