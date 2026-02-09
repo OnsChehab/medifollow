@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&family=Space+Mono&display=swap');
+
+:root {
+    /* Colors from @app */
+    --primary: 180 70% 48%;
+    /* #22D3D3 */
+    --primary-rgb: 34, 211, 211;
+    --navy: #0B1A26;
+    --cool-gray: #6B7A88;
+    --background: #F6FAFC;
+    --background-secondary: #E8F1F5;
+    --foreground: #0e161c;
+    --card: #ffffff;
+    --border: #e2e8f0;
+    --radius: 1.25rem;
+    /* Slightly reduced from 1.75rem for a balance */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-card: 0 18px 40px rgba(11, 26, 38, 0.08);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--background);
+    color: var(--foreground);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    color: var(--navy);
+}
+
+/* Premium Card Style */
+.card {
+    background: var(--card);
+    border: none;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+/* Premium Button Overrides */
+.btn {
+    border-radius: calc(var(--radius) / 2);
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: hsl(var(--primary));
+    border-color: hsl(var(--primary));
+    color: var(--navy);
+}
+
+.btn-primary:hover {
+    background-color: #1cbdbd;
+    border-color: #1cbdbd;
+    color: var(--navy);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(34, 211, 211, 0.3);
+}
+
+.btn-outline-primary {
+    color: #22d3d3;
+    border-color: #22d3d3;
+}
+
+.btn-outline-primary:hover {
+    background-color: #22d3d3;
+    color: var(--navy);
+}
+
+/* Layout Utilities */
+.bg-light {
+    background-color: var(--background) !important;
+}
+
+.bg-ice {
+    background-color: var(--background-secondary);
+}
+
+.text-navy {
+    color: var(--navy) !important;
+}
+
+.text-teal {
+    color: #22d3d3 !important;
+}
+
+.teal-circle {
+    width: 64px;
+    height: 64px;
+    background-color: #22d3d3;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(34, 211, 211, 0.3);
+}
+
+.fw-extrabold {
+    font-weight: 800;
+}
+
+/* Sidebar & Navigation Premium Look */
+.sidebar-heading {
+    font-family: 'Manrope', sans-serif;
+    letter-spacing: -0.5px;
+}
+
+.list-group-item {
+    border: none;
+    border-radius: calc(var(--radius) / 2.5);
+    margin: 4px 12px;
+    padding: 12px 16px;
+    transition: all 0.2s ease;
+}
+
+.list-group-item.active {
+    background-color: var(--background-secondary) !important;
+    color: #1cbdbd !important;
+    font-weight: 700;
+}
+
+.list-group-item:hover:not(.active) {
+    background-color: #f1f5f9;
+    padding-left: 20px;
+}
+
+/* Form Styles */
+.form-control,
+.form-select {
+    border-radius: calc(var(--radius) / 2);
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    background-color: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #22d3d3;
+    box-shadow: 0 0 0 4px rgba(34, 211, 211, 0.1);
+    outline: none;
+}

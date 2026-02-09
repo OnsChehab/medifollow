@@ -1,0 +1,45 @@
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4 text-white">
+        <h2 class="fw-bold text-primary"><i class="fas fa-hospital me-2"></i>Unit Administration</h2>
+        <button class="btn btn-primary"><i class="fas fa-plus me-2"></i>Provision New Unit</button>
+    </div>
+
+    <div class="row g-4">
+        @for (unit of units(); track unit.id) {
+        <div class="col-md-4">
+            <div class="card bg-dark text-white border-secondary h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <h5 class="card-title fw-bold text-primary mb-0">{{ unit.name }}</h5>
+                        <span class="badge" [class.bg-success]="unit.status === 'OPERATIONAL'"
+                            [class.bg-warning]="unit.status === 'MAINTENANCE'">
+                            {{ unit.status }}
+                        </span>
+                    </div>
+                    <p class="text-muted small mb-3"><i class="fas fa-building me-2"></i>{{ unit.hospital }}</p>
+
+                    <div class="mb-3">
+                        <label class="small text-muted mb-1 d-block">Occupancy Rate</label>
+                        <div class="progress bg-secondary" style="height: 10px;">
+                            <div class="progress-bar" [class.bg-success]="unit.occupancy < 70"
+                                [class.bg-warning]="unit.occupancy >= 70 && unit.occupancy < 90"
+                                [class.bg-danger]="unit.occupancy >= 90" [style.width.%]="unit.occupancy">
+                            </div>
+                        </div>
+                        <div class="text-end small text-muted mt-1">{{ unit.occupancy }}% Capacity</div>
+                    </div>
+
+                    <div class="d-flex align-items-center text-muted small">
+                        <i class="fas fa-user-md me-2"></i>
+                        <span>Responsible: <strong>{{ unit.head }}</strong></span>
+                    </div>
+                </div>
+                <div class="card-footer border-secondary bg-transparent d-flex gap-2">
+                    <button class="btn btn-sm btn-outline-light flex-grow-1">Configure</button>
+                    <button class="btn btn-sm btn-outline-info"><i class="fas fa-cog"></i></button>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>

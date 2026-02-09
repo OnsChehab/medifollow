@@ -1,0 +1,89 @@
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow border-0">
+                <div class="card-header bg-info text-white p-4">
+                    <h3 class="mb-0"><i class="fas fa-notes-medical me-2"></i>Report Symptoms</h3>
+                    <p class="mb-0 opacity-75">How are you feeling right now?</p>
+                </div>
+                <div class="card-body p-4">
+
+                    <div *ngIf="successMessage()" class="alert alert-success d-flex align-items-center mb-4">
+                        <i class="fas fa-check-circle me-2 fs-4"></i>
+                        <div>{{ successMessage() }}</div>
+                    </div>
+
+                    <form (ngSubmit)="onSubmit()">
+
+                        <!-- Pain Slider -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold d-flex justify-content-between">
+                                <span>Pain Level</span>
+                                <span class="badge bg-primary rounded-pill">{{ symptoms.painLevel }} / 10</span>
+                            </label>
+                            <input type="range" class="form-range" min="0" max="10" [(ngModel)]="symptoms.painLevel"
+                                name="pain">
+                            <div class="d-flex justify-content-between small text-muted">
+                                <span>No Pain</span>
+                                <span>Severe Pain</span>
+                            </div>
+                        </div>
+
+                        <!-- Fatigue Slider -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold d-flex justify-content-between">
+                                <span>Fatigue Level</span>
+                                <span class="badge bg-primary rounded-pill">{{ symptoms.fatigueLevel }} / 10</span>
+                            </label>
+                            <input type="range" class="form-range" min="0" max="10" [(ngModel)]="symptoms.fatigueLevel"
+                                name="fatigue">
+                            <div class="d-flex justify-content-between small text-muted">
+                                <span>Energetic</span>
+                                <span>Exhausted</span>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <!-- Checkboxes -->
+                        <div class="mb-3">
+                            <label class="form-label fw-bold mb-3">Do you experience?</label>
+
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" [(ngModel)]="symptoms.shortnessOfBreath"
+                                    name="breath" id="breathCheck">
+                                <label class="form-check-label" for="breathCheck">
+                                    Shortness of Breath
+                                </label>
+                            </div>
+
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="checkbox" [(ngModel)]="symptoms.nausea"
+                                    name="nausea" id="nauseaCheck">
+                                <label class="form-check-label" for="nauseaCheck">
+                                    Nausea or Vomiting
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Notes -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Additional Notes</label>
+                            <textarea class="form-control" rows="3" [(ngModel)]="symptoms.notes" name="notes"
+                                placeholder="Describe any other symptoms..."></textarea>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-info text-white btn-lg" [disabled]="isSubmitting()">
+                                <span *ngIf="isSubmitting()" class="spinner-border spinner-border-sm me-2"></span>
+                                Submit Report
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary"
+                                routerLink="/app/dashboard">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
