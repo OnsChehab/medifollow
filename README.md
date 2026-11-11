@@ -1,78 +1,107 @@
-Sure — here are clean, presentation-ready points you can include for your MediFollow / Patient + Nursing Portal UI.
+# MediFollow — Post-discharge patient follow-up platform
 
-✅ 1) Integration of UX Principles (1–3)
-1. Clear Navigation & Role-Based Experience
+MediFollow helps hospital teams follow patients after they leave the hospital. Patients report their vital signs and symptoms from home, and the care team (physicians, nurses, coordinators) monitors them, receives alerts and schedules follow-up appointments.
 
-The interface uses a sidebar menu with clear sections (Home, Enter Vitals, Report Symptoms, My History).
-This supports recognition over recall, making it easy for patients and nurses to find what they need quickly.
+> Academic project (PI) — ESPRIT, 4th year engineering, 2025-2026, team of 5.
+> This repository contains the **first version** of the platform (February 2026): an Angular front end and a NestJS REST API.
 
-2. Visual Hierarchy & Readability
+## Features
 
-Large headings like “Book Appointment” and “Hello, Alice Patient” establish strong hierarchy.
-Important actions are highlighted with cards, icons, and strong CTA buttons, guiding users naturally through the workflow.
+**Patients**
+- Enter vital signs: temperature, blood pressure, heart rate, weight
+- Report symptoms with a severity level (mild, moderate, severe, critical)
+- Answer follow-up questionnaires
 
-3. Simplified Task Flow (Minimal Steps)
+**Care team**
+- Physicians: patient list, patient record, schedule and messages
+- Nurses: book appointments with a physician
+- Coordinators: follow-up dashboard
 
-Booking an appointment is structured into a step-by-step process:
+**Administration**
+- Staff and patient management, hospital units
+- Questionnaire builder
+- Alert supervision
+- Audit logs for the auditor role
 
-Choose physician
+**7 roles:** super admin, admin, physician, nurse, coordinator, patient, auditor — each with its own dashboard and routes.
 
-Select date
+## Tech stack
 
-Pick a time
+| Layer | Technologies |
+|---|---|
+| Front end | Angular 20, TypeScript, SCSS, route guards (authentication and role) |
+| Back end | NestJS 11, TypeScript, REST API, class-validator |
+| Database | MongoDB with TypeORM |
+| API docs | Swagger (OpenAPI) |
+| Tests | Jest (unit and e2e setup) |
 
-This reduces cognitive load and follows the UX principle of progressive disclosure, helping users focus on one task at a time.
+## Architecture
 
-♿ 2) Consideration of Accessibility Standards
-Color Contrast & Visual Clarity
+```
+medifollow_FE/   Angular application
+  src/app/core/        auth service, guards, models, API services
+  src/app/features/    one folder per role (patient, doctor, nurse, admin, ...)
+  src/app/layouts/     shared layouts
 
-The palette uses strong contrast (navy text on white/ice background).
-This supports WCAG readability standards, especially for users with low vision.
+medifollow_be/   NestJS API — one module per business domain
+  users/              users and roles
+  patients/           patient clinical records
+  medical-data/       vital parameters and symptoms
+  questionnaires/     templates and responses
+  safety/             alerts and notifications
+  doctor-schedule/    physician availability and exceptions
+  appointments/       follow-up appointments
+  hospital-services/  hospital units
+```
 
-Large Buttons + Clear Touch Targets
+Each back-end module follows the NestJS structure: entity, service (business logic and database access) and controller (REST endpoints). Input validation is global, with `ValidationPipe` (`whitelist` and `transform`).
 
-Primary buttons (Enter Vitals, Report Symptoms, View Details) are wide and easy to click, improving usability for:
+## Getting started
 
-elderly users
+**Requirements:** Node.js 20+, MongoDB running locally.
 
-mobile users
+**Back end**
 
-users with motor impairments
+```bash
+cd medifollow_be
+npm install
+```
 
-Consistent Typography
+Create a `.env` file:
 
-Using a defined base font size (--font-size-base) and readable line height (--line-height-readable) improves legibility and reduces eye strain.
+```
+DB_HOST=localhost
+DB_PORT=27017
+DB_NAME=medifollow
+DB_SYNC=true
+PORT=3000
+```
 
-Icons + Text Labels
+```bash
+npm run start:dev
+```
 
-Icons are paired with text (“Daily Vitals”, “Symptom Log”), which helps users with cognitive challenges and improves clarity for first-time users.
+The API runs on `http://localhost:3000` and the Swagger documentation on `http://localhost:3000/api/docs`.
 
-(Optional line for presentation):
-Future improvement: add keyboard navigation support + ARIA labels for form elements.
+**Front end**
 
-🌱 3) Sustainability & Responsible Digital Practices
-Lightweight UI Design
+```bash
+cd medifollow_FE
+npm install
+npm start
+```
 
-The dashboard design is clean and minimal, avoiding unnecessary animations and heavy visuals.
-This reduces bandwidth usage and energy consumption, especially for users on low-end devices.
+The application runs on `http://localhost:4200`.
 
-Efficient User Journeys (Less Time on Screen)
+## Status and next steps
 
-Quick access cards like Daily Vitals and Symptom Log reduce the number of clicks needed, meaning:
+This is the first iteration of the project. The following parts were planned or developed later by the team:
 
-less time spent navigating
+- server-side authentication (JWT) and role checks on every API route (in this version, access control is done by Angular route guards only)
+- automatic rule-based alerts when a patient's measurements exceed thresholds
+- email verification and real-time notifications
 
-less server load
+## Author
 
-more efficient digital interaction
-
-Responsible Healthcare Communication
-
-The system encourages preventive behavior through health tips and symptom tracking.
-This supports responsible digital health practices by promoting early reporting instead of delayed intervention.
-
-Reusable UI Components
-
-Using standardized styles (colors, shadows, transitions) promotes a modular design system, reducing development waste and improving maintainability over time.
-
-If you want, I can format this into 3 clean presentation slides (with short bullet points) so you can paste directly into PowerPoint.
+Ons Chehab — computer engineering student at ESPRIT (TWIN track)
+[LinkedIn](https://www.linkedin.com/in/ons-chehab-90b298294)
